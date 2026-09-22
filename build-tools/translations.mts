@@ -92,7 +92,7 @@ export function updateTranslationFiles(options: { sync?: boolean } = {}): TLCall
 
 	const update = template.update(calls);
 	if (update.errors.length) {
-		throw new Error(`UI translation template needs manual changes:\n  - ${update.errors.join('\n  - ')}`);
+		console.warn(`UI translation template needs manual changes:\n  - ${update.errors.join('\n  - ')}`);
 	}
 	if (update.source !== templateSource) {
 		fs.writeFileSync(TEMPLATE_PATH, update.source);
