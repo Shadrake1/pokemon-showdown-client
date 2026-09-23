@@ -1260,7 +1260,6 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 			tierSet = tierSet.slice(slices.Regular);
 		} else if (format.startsWith('custom')) {
 			// Show full tierSet for custom formats including custom tiers
-			tierSet = tierSet;
 		} else if (!isDoublesOrBS) {
 			tierSet = [
 				...tierSet.slice(slices.OU, slices.UU),
