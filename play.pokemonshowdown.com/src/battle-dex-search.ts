@@ -1261,14 +1261,18 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 		} else if (format.startsWith('custom') && format !== 'customgame') {
 			const customTiers = ['Vtuber', 'Other']; // ← your tier names
 			const byTier: { [tier: string]: ID[] } = {};
-			for (const id in this.getTable()) {
+			const overrideTier = (window as any).BattleTeambuilderTable?.overrideTier || {};
+			// getDefaultResults() is confirmed to include custom mons
+			for (const [type, id] of this.getDefaultResults()) {
+				if (type !== 'pokemon') continue;
 				const pokemon = this.dex.species.get(id as ID);
-				const tier = pokemon.tier; // read directly, bypass teambuilder table
+				const tier = pokemon.tier;
 				if (customTiers.includes(tier)) {
 					if (!byTier[tier]) byTier[tier] = [];
 					byTier[tier].push(id as ID);
 				}
 			}
+
 			const results: SearchRow[] = [];
 			for (const tier of customTiers) {
 				if (byTier[tier]?.length) {
