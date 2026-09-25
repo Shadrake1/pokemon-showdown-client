@@ -930,7 +930,7 @@ class LoginPanel extends PSRoomPanel {
     	const name = this.getUsername();
 	    // For unregistered servers, skip the PS login server entirely
 	    if (!Config.defaultserver?.registered) {
- 	       PS.user.handleAssertion(name, '');
+ 	       PS.user.handleAssertion(name, 'noverify');
  	       return;
  	   }
 	    const passwordBox = this.base!.querySelector<HTMLInputElement>('input[name=password]');
